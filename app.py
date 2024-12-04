@@ -1,9 +1,10 @@
+import os
 from flask import Flask, render_template
 from flask_cors import CORS
 from flask_socketio import SocketIO, emit
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = '02149e48f1de528608b4bd6035b036f04f1e802f'
+SECRET_KEY = os.getenv("SECRET_KEY", "02149e48f1de528608b4bd6035b036f04f1e802f")
 CORS(app)
 socketio = SocketIO(app, cors_allowed_origins="*")
 
