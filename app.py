@@ -4,12 +4,16 @@ from flask_socketio import SocketIO, emit
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '02149e48f1de528608b4bd6035b036f04f1e802f'
-cors = CORS(app, resources={r"*": {"origins": "*"}})
+cors = CORS(app, resources={["https://real-time-notification.vercel.app"]})
 socketio = SocketIO(app, cors_allowed_origins="*")
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return "CORS Configured!"
+
+@socketio.on("connect")
+def handle_connect():
+    print("Client connected")
 
 @socketio.on('message')
 def handle_message(message):
